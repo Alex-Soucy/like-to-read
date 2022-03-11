@@ -20,7 +20,8 @@ const promptUser = () => {
         {
             type: 'input',
             name: 'installation',
-            message: 'Describe the process for installation:',
+            message: 'Install the inquirer package using the following command:',
+            default: 'npm i inquirer'
         },
         {
             type: 'input',
