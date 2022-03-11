@@ -1,6 +1,7 @@
 // TODO: Include packages needed for this application
 const fs = require('fs');
 const inquirer = require('inquirer');
+const path = require('path');
 const generateMarkdown = require('./utils/generateMarkdown');
 
 // TODO: Create an array of questions for user input
@@ -8,7 +9,7 @@ const promptUser = () => {
     return inquirer.prompt([
         {
             type: 'input',
-            name: 'readMeTitle',
+            name: 'projectTitle',
             message: 'What is the title of the project?:'
         },
         {
@@ -18,7 +19,7 @@ const promptUser = () => {
         },
         {
             type: 'input',
-            name: 'install',
+            name: 'installation',
             message: 'Describe the process for installation:',
         },
         {
@@ -57,11 +58,18 @@ const promptUser = () => {
 }
 
 promptUser();
-// TODO: Create a function to write README file
-// function writeToFile(fileName, data) {}
+// Function to write README file with the user input
+function writeToFile(fileName, data) {
+    return fs.writeFileSync(path.join(process.cwd(), fileName), data);
+}
 
-// TODO: Create a function to initialize app
-// function init() {}
+// Function to initialize app
+function init() {
+    inquirer.prompt(questions).then(inquirerResponses => {
+        console.log('Creating README file');
+        writeToFile('README.md', generateMarkdown({ ...inquirerResponses }));
+    });
+}
 
 // Function call to initialize app
-// init();
+init();
