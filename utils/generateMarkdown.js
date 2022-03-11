@@ -3,8 +3,9 @@
 function renderLicenseBadge(license) {
   if (license !== 'None') {
     return `![GitHub license](https://img.shields.io/badge/license-${license}-green.svg)`;
+  } else {
+    return '';
   }
-  return '';
 }
 
 // Function that returns the link for the license selected
@@ -12,8 +13,9 @@ function renderLicenseBadge(license) {
 function renderLicenseLink(license) {
   if (license !== 'None') {
     return `\n [License](#license)\n`;
+  } else {
+    return '';
   }
-  return '';
 }
 
 // Function that returns the license section of the README
@@ -23,13 +25,14 @@ function renderLicenseSection(license) {
     return `## License
     
     This application is covered by the ${license} license.`;
+  } else {
+    return '';
   }
-  return '';
 }
 
 // Function to generate the markdown code for the README being created
 function generateMarkdown(data) {
-  return `# ${data.projectTitle}
+  return `# ${data.title}
   ${renderLicenseBadge(data.license)}
 
   ## Table of Contents
@@ -37,7 +40,7 @@ function generateMarkdown(data) {
   * [Installation](#installation)
   * [Usage](#usage)
   ${renderLicenseLink(data.license)}
-  * [Tests](#testingConfirm)
+  * [Tests](#tests)
   * [Contribution](#contribution)
   
   ## Description
@@ -45,7 +48,7 @@ function generateMarkdown(data) {
 
   ### Installation
 
-  ${data.install}
+  ${data.installation}
 
   ### Usage
   ${data.usage}

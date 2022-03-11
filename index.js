@@ -1,15 +1,14 @@
 // TODO: Include packages needed for this application
 const fs = require('fs');
 const inquirer = require('inquirer');
-const path = require('path');
 const generateMarkdown = require('./utils/generateMarkdown');
 
-// TODO: Create an array of questions for user input
-const promptUser = () => {
+// Created an array of questions for user input
+const questions = () => {
     return inquirer.prompt([
         {
             type: 'input',
-            name: 'projectTitle',
+            name: 'title',
             message: 'What is the title of the project?:'
         },
         {
@@ -21,7 +20,6 @@ const promptUser = () => {
             type: 'input',
             name: 'installation',
             message: 'Install the inquirer package using the following command:',
-            default: 'npm i inquirer'
         },
         {
             type: 'input',
@@ -35,9 +33,8 @@ const promptUser = () => {
         },
         {
             type: 'confirm',
-            name: 'testingConfirm',
+            name: 'tests',
             message: 'Is there testing involved with this project?:',
-            default: false
         },
         {
             type: 'checkbox',
@@ -56,9 +53,8 @@ const promptUser = () => {
             message: 'Enter your e-mail address for people to contact you with questions:'
         }
     ]);
-}
+};
 
-promptUser();
 // Function to write README file with the user input
 function writeToFile(fileName, data) {
     return fs.writeFileSync(path.join(process.cwd(), fileName), data);
